@@ -3,13 +3,11 @@ from app.utils.jwt_utils import create_access_token
 from app.repository.user_repository import find_user_by_email, insert_user
 
 def register_user(user_data):
-    print(f"Registering user with data: {user_data}")
     if find_user_by_email(user_data["email"]):
         raise ValueError("User already exists")
 
     hashed = hash_password(user_data["password"])  
     user_data["password"] = hashed  # Atualiza o dicionário com a senha hash
-    print(f"Hashed password: {user_data['password']}")
     insert_user(user_data)  
     return {"message": "User created successfully"}
 

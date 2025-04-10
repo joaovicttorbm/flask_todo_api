@@ -10,9 +10,7 @@ auth = Blueprint("auth", __name__)
 def register():
     try:
         user_data = User(**request.json)  # Valida os dados com Pydantic
-        print({"user_data": user_data})
         result = register_user(user_data.model_dump())  # Passa como dicionário
-        print({"result": result})
         return jsonify({"message": "User registered successfully"}), 201
     except ValidationError as e:
         return jsonify(format_validation_error(e)), 400
