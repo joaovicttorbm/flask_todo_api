@@ -82,8 +82,8 @@ Uma API RESTful para gerenciamento de tarefas pessoais (To‑Do List), com auten
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
-cd seu-repo
+git clone https://github.com/joaovicttorbm/flask_todo_api.git
+cd flask_todo_api
 ```
 ````
 
