@@ -25,6 +25,15 @@ def get_current_user():
 
 @routes.route("/tasks", methods=["POST"])
 def create_task():
+    """
+    Insere uma nova tarefa no banco de dados.
+
+    Args:
+        task_data (dict): Dados da tarefa a ser inserida.
+
+    Returns:
+        InsertOneResult: Resultado da operação de inserção.
+    """
     user_id = get_current_user()
     if not user_id:
         return jsonify({"error": "Unauthorized"}), 401
@@ -38,6 +47,15 @@ def create_task():
 
 @routes.route("/tasks", methods=["GET"])
 def get_tasks():
+    """
+    Busca todas as tarefas de um usuário específico.
+
+    Args:
+        user_id (str): ID do usuário.
+
+    Returns:
+        Cursor: Cursor com as tarefas encontradas.
+    """
     user_id = get_current_user()
     if not user_id:
         return jsonify({"error": "Unauthorized"}), 401
@@ -47,6 +65,15 @@ def get_tasks():
 
 @routes.route("/tasks/<task_id>", methods=["GET"])
 def get_task(task_id):
+    """
+    Busca uma tarefa específica pelo seu ID.
+
+    Args:
+        task_id (str): ID da tarefa.
+
+    Returns:
+        dict: Dados da tarefa encontrada ou None se não existir.
+    """
     user_id = get_current_user()
     if not user_id:
         return jsonify({"error": "Unauthorized"}), 401
@@ -62,6 +89,16 @@ def get_task(task_id):
 
 @routes.route("/tasks/<task_id>", methods=["PUT"])
 def update_task(task_id):
+    """
+    Atualiza os dados de uma tarefa específica.
+
+    Args:
+        task_id (str): ID da tarefa.
+        update_data (dict): Dados a serem atualizados.
+
+    Returns:
+        UpdateResult: Resultado da operação de atualização.
+    """
     user_id = get_current_user()
     if not user_id:
         return jsonify({"error": "Unauthorized"}), 401
@@ -87,6 +124,15 @@ def update_task(task_id):
 
 @routes.route("/tasks/<task_id>", methods=["DELETE"])
 def delete_task(task_id):
+    """
+    Deleta uma tarefa específica pelo seu ID.
+
+    Args:
+        task_id (str): ID da tarefa.
+
+    Returns:
+        DeleteResult: Resultado da operação de exclusão.
+    """
     user_id = get_current_user()
     if not user_id:
         return jsonify({"error": "Unauthorized"}), 401
