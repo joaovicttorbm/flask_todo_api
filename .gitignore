@@ -1,0 +1,35 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+
+# Virtual Environment
+venv/
+env/
+
+# IDEs e Ferramentas
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs e Arquivos Temporários
+*.log
+*.tmp
+*.bak
+*.pid
+*.seed
+*.backup
+
+# Docker
+*.env
+docker-compose.override.yml
+
+# MongoDB
+mongo_data/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db

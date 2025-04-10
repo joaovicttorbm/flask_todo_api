@@ -1,0 +1,8 @@
+flask
+pymongo
+pydantic
+python-dotenv
+bcrypt
+PyJWT
+passlib
+email-validator==2.1.0.post1
