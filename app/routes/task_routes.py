@@ -26,13 +26,15 @@ def get_current_user():
 @routes.route("/tasks", methods=["POST"])
 def create_task():
     """
-    Insere uma nova tarefa no banco de dados.
+    Endpoint para criar uma nova tarefa.
 
-    Args:
-        task_data (dict): Dados da tarefa a ser inserida.
+    Recebe os dados da tarefa no corpo da requisição (JSON),
+    valida os dados e os insere no banco de dados.
 
-    Returns:
-        InsertOneResult: Resultado da operação de inserção.
+    Retorna:
+        - 201: Mensagem de sucesso e ID da tarefa criada.
+        - 400: Mensagem de erro se os dados forem inválidos.
+        - 401: Mensagem de erro se o usuário não estiver autenticado.
     """
     user_id = get_current_user()
     if not user_id:
@@ -48,13 +50,11 @@ def create_task():
 @routes.route("/tasks", methods=["GET"])
 def get_tasks():
     """
-    Busca todas as tarefas de um usuário específico.
+    Endpoint para listar todas as tarefas do usuário autenticado.
 
-    Args:
-        user_id (str): ID do usuário.
-
-    Returns:
-        Cursor: Cursor com as tarefas encontradas.
+    Retorna:
+        - 200: Lista de tarefas do usuário.
+        - 401: Mensagem de erro se o usuário não estiver autenticado.
     """
     user_id = get_current_user()
     if not user_id:
@@ -66,13 +66,13 @@ def get_tasks():
 @routes.route("/tasks/<task_id>", methods=["GET"])
 def get_task(task_id):
     """
-    Busca uma tarefa específica pelo seu ID.
+    Endpoint para obter os dados de uma tarefa específica.
 
-    Args:
-        task_id (str): ID da tarefa.
-
-    Returns:
-        dict: Dados da tarefa encontrada ou None se não existir.
+    Retorna:
+        - 200: Dados da tarefa encontrada.
+        - 400: Mensagem de erro se o ID for inválido.
+        - 404: Mensagem de erro se a tarefa não for encontrada.
+        - 401: Mensagem de erro se o usuário não estiver autenticado.
     """
     user_id = get_current_user()
     if not user_id:
@@ -90,14 +90,13 @@ def get_task(task_id):
 @routes.route("/tasks/<task_id>", methods=["PUT"])
 def update_task(task_id):
     """
-    Atualiza os dados de uma tarefa específica.
+    Endpoint para atualizar os dados de uma tarefa.
 
-    Args:
-        task_id (str): ID da tarefa.
-        update_data (dict): Dados a serem atualizados.
-
-    Returns:
-        UpdateResult: Resultado da operação de atualização.
+    Retorna:
+        - 200: Mensagem de sucesso se a tarefa for atualizada.
+        - 400: Mensagem de erro se os dados forem inválidos.
+        - 403: Mensagem de erro se o usuário não for o proprietário da tarefa.
+        - 401: Mensagem de erro se o usuário não estiver autenticado.
     """
     user_id = get_current_user()
     if not user_id:
@@ -125,13 +124,13 @@ def update_task(task_id):
 @routes.route("/tasks/<task_id>", methods=["DELETE"])
 def delete_task(task_id):
     """
-    Deleta uma tarefa específica pelo seu ID.
+    Endpoint para deletar uma tarefa.
 
-    Args:
-        task_id (str): ID da tarefa.
-
-    Returns:
-        DeleteResult: Resultado da operação de exclusão.
+    Retorna:
+        - 200: Mensagem de sucesso se a tarefa for deletada.
+        - 400: Mensagem de erro se o ID for inválido.
+        - 403: Mensagem de erro se o usuário não for o proprietário da tarefa.
+        - 401: Mensagem de erro se o usuário não estiver autenticado.
     """
     user_id = get_current_user()
     if not user_id:
