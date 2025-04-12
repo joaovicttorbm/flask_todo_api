@@ -1,8 +1,8 @@
 from bson import ObjectId
-from bson.errors import InvalidId
+from flask import abort
 
 def validate_object_id(task_id: str) -> ObjectId:
     try:
         return ObjectId(task_id)
-    except InvalidId:
-        raise InvalidId(f"'{task_id}' is not a valid ObjectId.")
+    except Exception:
+        abort(400, description=f"'{task_id}' is not a valid ObjectId.")
